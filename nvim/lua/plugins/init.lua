@@ -63,19 +63,19 @@ packer.startup(function(use)
     after = "nvim-cmp",
   }
 
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use { "nvim-neo-tree/neo-tree.nvim", -- Directory listing tree
-    branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-  }
+  -- use { "nvim-neo-tree/neo-tree.nvim", -- Directory listing tree
+  --   branch = "v2.x",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "kyazdani42/nvim-web-devicons",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  -- }
   use {
     "nvim-telescope/telescope.nvim",
     after="nvim-cmp",
   }
+  use 'onsails/lspkind-nvim' -- vscode-like pictograms
   use "nvim-lualine/lualine.nvim" -- Tab line top and bottom
   use 'tpope/vim-commentary' -- gc to comment out
   use 'tpope/vim-surround' -- easy text surrounding shortcuts
