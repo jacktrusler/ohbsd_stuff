@@ -2,28 +2,33 @@ local g = vim.g
 local opt = vim.opt
 
 g.netrw_banner = 0
+g.mkdp_markdown_css = '/home/jack/.config/nvim/lua/settings/markdownPlugin.css'
 -- Colors
 opt.termguicolors = true
 opt.hlsearch = false
 -- Indenting
-opt.expandtab = true
+opt.expandtab = true -- insert mode puts in spaces when tabbing
+opt.tabstop = 2 -- number of spaces a tab counts for
+opt.softtabstop = 2 -- editing operations (like <BS>) are deleting 2 spaces
 opt.shiftwidth = 2
 opt.smartindent = true
--- Line Numbers
+-- Line Numbers & Side Column
 opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 2
--- show line and cursor position, redundant with lualine
-opt.ruler = false
--- scroll (x) lines from top and bottom
-opt.scrolloff = 10
--- don't expand column on errors
-opt.signcolumn = "no"
-opt.cursorline = true
+opt.ruler = false -- show line and cursor position, redundant with lualine
+opt.scrolloff = 10 -- scroll (x) lines from top and bottom
+opt.signcolumn = "no" -- don't expand column on errors
+-- Searching
+opt.ignorecase = true
+opt.smartcase = true -- caps ignores lowercase
+opt.incsearch = true -- jumps to what you're searching
+opt.cursorline = true -- highlights current line
 -- Mouse
 opt.mouse = 'a'
--- Misc
+-- living dangerously
 vim.api.nvim_command("set noswapfile")
+
 -- Don't automatically make more comments lines on enter
 vim.api.nvim_create_autocmd("BufEnter",
   {
@@ -32,10 +37,19 @@ vim.api.nvim_create_autocmd("BufEnter",
     end
   }
 )
--- Vim syntax doesn't turn on automatically sometimes and I can't figure out why ;_;
+
+-- Force syntax on when entering every buffer
 vim.api.nvim_create_autocmd("BufEnter",
   {
     callback = function() vim.cmd [[syntax on]]
+    end
+  }
+)
+
+-- Highlights yanked text
+vim.api.nvim_create_autocmd("TextYankPost",
+  {
+    callback = function() vim.highlight.on_yank { higroup = 'Question', timeout = 400 }
     end
   }
 )
